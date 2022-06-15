@@ -19,11 +19,26 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                            <a class="nav-link active" aria-current="page" href="{{route('index')}}">Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{route('books.index')}}">Libros</a>
                         </li>
+                        @if(Auth::check())
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{Auth::user()->name}}
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="{{route('dashboard')}}">Perfil</a></li>
+                                    <li><a class="dropdown-item" href="{{route('logout')}}">Logout</a></li>
+                                </ul>
+                            </li>
+                        @else
+                        <li>
+                            <a class="nav-link active" aria-current="page" href="{{route('login')}}">Entrar</a>
+                        </li>
+                            @endif
                     </ul>
                     <form class="d-flex" role="search">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
