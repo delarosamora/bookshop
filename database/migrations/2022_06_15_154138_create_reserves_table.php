@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models;
 
 class CreateReservesTable extends Migration
 {
@@ -17,8 +16,11 @@ class CreateReservesTable extends Migration
         Schema::create('reserves', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Book::class);
+            $table->foreignIdFor(\App\Models\User::class);
+            $table->foreignIdFor(\App\Models\Book::class);
+            $table->date('date');
+            $table->time('time');
+            $table->boolean('returned');
         });
     }
 
