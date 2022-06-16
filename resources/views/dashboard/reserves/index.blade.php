@@ -3,7 +3,9 @@
 @section('content')
     <h2 class="text-center">RESERVAS DE LOS USUARIOS</h2>
     @if ($message = Session::get('success'))
-        <p>{{$message}}</p>
+        <div class="alert alert-success" role="alert">
+            {{$message}}
+        </div>
     @endif
     <table class="table table-striped">
         <thead>
@@ -19,8 +21,8 @@
         <tbody>
         @foreach ($reserves as $reserve)
             <tr>
-                <td>{{$reserve->book->title}}</td>
-                <td>{{$reserve->user->name}}</td>
+                <td>{{$reserve->book->title ?? "LIBRO NO ENCONTRADO"}}</td>
+                <td>{{$reserve->user->name}} {{$reserve->user->surname}}</td>
                 <td>{{$reserve->date}}</td>
                 <td>{{$reserve->time}}</td>
                 <td>{{$reserve->returned ? "SI" : "NO"}}</td>

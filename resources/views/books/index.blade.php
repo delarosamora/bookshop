@@ -15,11 +15,15 @@
                 <td>{{$book->title}}</td>
                 <td>{{$book->description}}</td>
                 <td>
+                    @if ($reserves->contains('book', $book))
+                        Reservado
+                    @else
                     <form method="POST" action="{{route('reserves.store')}}">
                         @csrf
                         <input type="hidden" name="book_id" value="{{$book->id}}"/>
                         <button type="submit" class="btn btn-success" type="submit">Reservar</button>
                     </form>
+                    @endif
                 </td>
             </tr>
         @endforeach

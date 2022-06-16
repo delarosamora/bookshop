@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ReserveBook;
 use App\Models\Book;
 use App\Models\Reserve;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ReserveController extends Controller
 {
@@ -57,6 +59,7 @@ class ReserveController extends Controller
         $reserve->date = date("Y-m-d");
         $reserve->time = date("H:i");
         $reserve->save();
+        Mail::to($reserve->user)->send(new ReserveBook($reserve));
         return redirect()->route('dashboard')->with('success', 'Reserva realizada');
     }
 

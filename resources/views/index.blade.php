@@ -1,5 +1,5 @@
 @extends('base')
 
 @section('content')
-    hola
+    INFOFUTURO
 @endsection

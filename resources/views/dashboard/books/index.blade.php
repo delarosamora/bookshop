@@ -3,7 +3,9 @@
 @section('content')
     <h2 class="text-center">LIBROS</h2>
     @if ($message = Session::get('success'))
-        <p>{{$message}}</p>
+        <div class="alert alert-success" role="alert">
+            {{$message}}
+        </div>
     @endif
     <a href="{{route('adminbooks.create')}}">Crear libro</a>
     <table class="table table-striped">

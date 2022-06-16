@@ -1,9 +1,11 @@
 @extends('base')
 
 @section('content')
-<h2>{{Auth::user()->name}}{{Auth::user()->admin ? " - TRABAJADOR" : ""}}</h2>
+<h2>{{Auth::user()->name}} {{Auth::user()->surname}}{{Auth::user()->admin ? " - TRABAJADOR" : ""}}</h2>
 @if ($message = Session::get('success'))
-    <p>{{$message}}</p>
+    <div class="alert alert-success" role="alert">
+        {{$message}}
+    </div>
 @endif
 
 <div class="card">

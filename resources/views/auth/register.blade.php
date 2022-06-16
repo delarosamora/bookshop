@@ -9,7 +9,15 @@
         <form>
             <div class="mb-3">
                 <label for="InputName" class="form-label">Nombre</label>
-                <input type="name" name="name" class="form-control" id="InputName" aria-describedby="emailHelp" required>
+                <input type="text" name="name" class="form-control" id="InputName" aria-describedby="InputName" required>
+            </div>
+            <div class="mb-3">
+                <label for="InputSurname" class="form-label">Apellidos</label>
+                <input type="text" name="surname" class="form-control" id="InputSurname" aria-describedby="InputSurname" required>
+            </div>
+            <div class="mb-3">
+                <label for="InputNif" class="form-label">NIF</label>
+                <input type="text" name="nif" class="form-control" id="InputNif" aria-describedby="InputNif" required>
             </div>
             <div class="mb-3">
                 <label for="InputEmail" class="form-label">Correo electrónico</label>
