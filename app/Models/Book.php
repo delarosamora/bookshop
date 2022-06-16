@@ -21,4 +21,14 @@ class Book extends Model
     {
         return $this->hasMany(Reserve::class);
     }
+
+    /**
+     * Check if the book is reserved and not returned.
+     *
+     * @return boolean
+     */
+    public function getIsReservedAttribute()
+    {
+        return $this->reserves()->where('returned', false)->count() > 0;
+    }
 }

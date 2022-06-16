@@ -15,7 +15,7 @@
                 <td>{{$book->title}}</td>
                 <td>{{$book->description}}</td>
                 <td>
-                    @if ($reserves->contains('book', $book))
+                    @if ($book->isReserved)
                         Reservado
                     @else
                     <form method="POST" action="{{route('reserves.store')}}">
