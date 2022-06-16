@@ -39,3 +39,5 @@ Route::prefix('dashboard')->group(function () {
 });
 
 Route::resource('adminbooks', BookAdminController::class)->middleware(\App\Http\Middleware\EnsureUserIsAdmin::class);
+
+Route::resource('reserves', \App\Http\Controllers\ReserveController::class)->middleware('auth');

@@ -46,4 +46,12 @@ class User extends Authenticatable
     protected $attributes = [
         'admin' => false,
     ];
+
+    /**
+     * Get the reserves of the User.
+     */
+    public function reserves()
+    {
+        return $this->hasMany(Reserve::class);
+    }
 }

@@ -13,4 +13,12 @@ class Book extends Model
      * @var array
      */
     protected $fillable = ['title', 'description'];
+
+    /**
+     * Get the reserves for the book.
+     */
+    public function reserves()
+    {
+        return $this->hasMany(Reserve::class);
+    }
 }
