@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('content')
-    <h2 class="text-center">ADMINISTRAR LIBROS</h2>
+    <h2 class="text-center">LIBROS</h2>
     @if ($message = Session::get('success'))
         <p>{{$message}}</p>
     @endif

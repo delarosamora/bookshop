@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Reserve;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class BookAdminController extends Controller
+class ReserveController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +17,18 @@ class BookAdminController extends Controller
      */
     public function index()
     {
-        return view('dashboard.books.index')->with('books', Book::all());
+        return view('dashboard.reserves.index')->with('reserves', Reserve::all()->sortBy('returned'));
+    }
+
+    /**
+     * Display a listing of the resource for the user.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexUser(Request $request)
+    {
+        return view('dashboard.myreserves.index')
+            ->with('reserves', Auth::user()->reserves->sortBy('returned'));
     }
 
     /**
@@ -25,7 +38,7 @@ class BookAdminController extends Controller
      */
     public function create()
     {
-        return view('dashboard.books.createbook');
+        //
     }
 
     /**
@@ -36,19 +49,15 @@ class BookAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|unique:books',
-            'description' => 'required',
-        ]);
-
-        $book = new Book(
-            [
-                'title' => $request->title,
-                'description' => $request->description
-            ]
-        );
-        $book->save();
-        return redirect()->route('adminbooks.index')->with('success', 'Libro creado con exito');
+        $book = Book::find($request->book_id);
+        $this->authorize('reserve', $book);
+        $reserve = new Reserve();
+        $reserve->book()->associate($book);
+        $reserve->user()->associate(Auth::user());
+        $reserve->date = date("Y-m-d");
+        $reserve->time = date("H:i");
+        $reserve->save();
+        return redirect()->route('dashboard')->with('success', 'Reserva realizada');
     }
 
     /**
@@ -70,8 +79,7 @@ class BookAdminController extends Controller
      */
     public function edit($id)
     {
-
-        return view('dashboard.books.editbook')->with('book', Book::find($id));
+        //
     }
 
     /**
@@ -83,15 +91,10 @@ class BookAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-        ]);
-        $book = Book::find($id);
-        $book->title = $request->title;
-        $book->description = $request->description;
-        $book->save();
-        return redirect()->route('adminbooks.index')->with('success', 'Libro editado con exito');
+        $reserve = Reserve::find($id);
+        $reserve->returned = true;
+        $reserve->save();
+        return back()->with('success', 'Libro devuelto');
     }
 
     /**
@@ -100,9 +103,8 @@ class BookAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        Book::destroy($id);
-        return redirect()->route('adminbooks.index')->with('success', 'Libro eliminado con exito');
+        //
     }
 }

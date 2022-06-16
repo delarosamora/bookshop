@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ReserveController;
+use App\Http\Middleware\EnsureUserIsAdmin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookAdminController;
@@ -34,10 +36,11 @@ Route::prefix('register')->group(function () {
     Route::post('/manage', [RegisterController::class, 'register'])->name('register.manage');
 });
 
-Route::prefix('dashboard')->group(function () {
-    Route::get('/', function () {return view('dashboard.index');})->middleware('auth')->name('dashboard');
-});
 
-Route::resource('adminbooks', BookAdminController::class)->middleware(\App\Http\Middleware\EnsureUserIsAdmin::class);
+Route::get('dashboard', function () {return view('dashboard.index');})->middleware('auth')->name('dashboard');
 
-Route::resource('reserves', \App\Http\Controllers\ReserveController::class)->middleware('auth');
+Route::resource('adminbooks', BookAdminController::class)->middleware(EnsureUserIsAdmin::class);
+
+Route::resource('reserves', ReserveController::class)->middleware('auth');
+
+Route::get('myreserves', [ReserveController::class, 'indexUser'])->middleware('auth')->name('myreserves');

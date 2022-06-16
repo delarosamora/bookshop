@@ -1,0 +1,43 @@
+@extends('base')
+
+@section('content')
+    <h2 class="text-center">RESERVAS DE LOS USUARIOS</h2>
+    @if ($message = Session::get('success'))
+        <p>{{$message}}</p>
+    @endif
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Libro</th>
+            <th>Usuario</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Devuelta</th>
+            <th>Devolver</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach ($reserves as $reserve)
+            <tr>
+                <td>{{$reserve->book->title}}</td>
+                <td>{{$reserve->user->name}}</td>
+                <td>{{$reserve->date}}</td>
+                <td>{{$reserve->time}}</td>
+                <td>{{$reserve->returned ? "SI" : "NO"}}</td>
+                <td>
+                    @if ($reserve->returned)
+                        DEVUELTA
+                    @else
+                        <form method="POST" action="{{route('reserves.update', $reserve->id)}}">
+                            @csrf
+                            @method("PUT")
+                            <input type="hidden" name="reserve_id" value="{{$reserve->id}}">
+                            <button type="submit" class="btn btn-danger" type="submit">Devolver</button>
+                        </form>
+                    @endif
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+@endsection
