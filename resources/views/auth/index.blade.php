@@ -1,11 +1,13 @@
 @extends('base')
 
 @section('content')
+    <div class="login-form p-4 border border-dark regular-shadow">
     @if($errors->any())
         @foreach ($errors->all() as $error)
             <p>{{ $error }}</p>
         @endforeach
     @endif
+        <h2>INICIAR SESIÓN</h2>
     <form method="POST" action="{{route('login.manage')}}">
         @csrf
             <div class="mb-3">
@@ -20,4 +22,5 @@
         </form>
         <a href="{{route('register')}}">Registrarse</a>
     </form>
+    </div>
 @endsection

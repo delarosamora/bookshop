@@ -3,10 +3,11 @@
 @section('content')
     <h2 class="text-center">MIS RESERVAS - {{Auth::user()->name}} {{Auth::user()->surname}}</h2>
     @if ($message = Session::get('success'))
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success w-50 m-auto regular-shadow mb-3" role="alert">
             {{$message}}
         </div>
     @endif
+    <div class="table-responsive">
     <table class="table table-striped">
         <thead>
         <tr>
@@ -42,4 +43,5 @@
         @endforeach
         </tbody>
     </table>
+    </div>
 @endsection

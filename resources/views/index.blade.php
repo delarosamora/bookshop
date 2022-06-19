@@ -1,5 +1,6 @@
 @extends('base')
 
 @section('content')
-    INFOFUTURO
+    <x-index.carousel />
+    <x-index.best-sales :bestSales="$bestSales" />
 @endsection

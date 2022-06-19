@@ -1,0 +1,50 @@
+.carousel-item img{
+    height: 450px;
+    object-fit: cover;
+}
+
+.carousel-caption{
+    bottom: 50%;
+    right: 50%;
+    transform: translate(50%, 50%);
+    background: rgba(0,0,0,0.56);
+}
+
+html, body{
+    overflow-x: hidden;
+    height: 100%;
+}
+
+.single-book{
+    min-height: 170px;
+    background: url("../img/book.webp");
+    background-size: cover;
+}
+
+.reserve-management .card-text, .books-management .card-text{
+    background: #ffffff80;
+}
+
+.card-body form{
+    position: absolute;
+    bottom: 10%;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+footer{
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
+}
+
+.login-form, .register-form{
+    position: absolute;
+    right: 50%;
+    bottom: 50%;
+    transform: translate(50%, 50%);
+}
+
+.regular-shadow{
+    box-shadow: 10px 10px 10px;
+}
