@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BookAdminController extends Controller
 {
@@ -44,9 +45,13 @@ class BookAdminController extends Controller
         $book = new Book(
             [
                 'title' => $request->title,
-                'description' => $request->description
+                'description' => $request->description,
             ]
         );
+        if ($request->hasFile('imagebook')){
+            $request->file('imagebook')->storeAs('images', $request->file('imagebook')->hashName());
+            $book->image = $request->file('imagebook')->hashName();
+        }
         $book->save();
         return redirect()->route('adminbooks.index')->with('success', 'Libro creado con exito');
     }
@@ -90,6 +95,10 @@ class BookAdminController extends Controller
         $book = Book::find($id);
         $book->title = $request->title;
         $book->description = $request->description;
+        if ($request->hasFile('imagebook')){
+            $request->file('imagebook')->storeAs('images', $request->file('imagebook')->hashName());
+            $book->image = $request->file('imagebook')->hashName();
+        }
         $book->save();
         return redirect()->route('adminbooks.index')->with('success', 'Libro editado con exito');
     }

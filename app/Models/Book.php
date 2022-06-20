@@ -12,7 +12,16 @@ class Book extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'description'];
+    protected $fillable = ['title', 'description', 'image'];
+
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'image' => "default.jpg",
+    ];
 
     /**
      * Get the reserves for the book.

@@ -17,19 +17,25 @@ html, body{
 
 .single-book{
     min-height: 170px;
-    background: url("../img/book.webp");
-    background-size: cover;
+    width: min-content !important;
+}
+
+.single-book .card-body{
+    padding: initial;
+}
+
+.book-info{
+    position: absolute;
+    bottom: 50%;
+    right: 50%;
+    transform: translate(50%, 50%);
+    color: white;
+    background-color: #000000a1;
+    width: 100%;
 }
 
 .reserve-management .card-text, .books-management .card-text{
     background: #ffffff80;
-}
-
-.card-body form{
-    position: absolute;
-    bottom: 10%;
-    right: 50%;
-    transform: translateX(50%);
 }
 
 footer{
